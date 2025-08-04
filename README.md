@@ -4,11 +4,11 @@ This Arduino project controls a **water pump** using a **relay** based on a simu
 
 ## Day & Night Irrigation Cycles
 
-- **Daytime (7 AM – 7 PM)**:
+- **Daytime (7 AM - 7 PM)**:
   - Pump ON: 2 minutes
   - Pump OFF: 1 minute
 
-- **Nighttime (7 PM – 7 AM)**:
+- **Nighttime (7 PM - 7 AM)**:
   - Pump ON: 2 hours
   - Pump OFF: 1 minute
 
@@ -25,7 +25,7 @@ The project uses `millis()` to track time internally and automatically switches 
 ## Key Features
 
 - Fully **automatic irrigation control**
-- No use of `delay()` — non-blocking logic with `millis()`
+- No use of `delay()` - non-blocking logic with `millis()`
 - **Day/night cycle simulation** without RTC or external timer
 - Safe relay control (Normally Open wiring: LOW = OFF, HIGH = ON)
 - Serial output for real-time monitoring
