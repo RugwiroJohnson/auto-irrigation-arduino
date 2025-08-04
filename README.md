@@ -2,7 +2,7 @@
 
 This Arduino project controls a **water pump** using a **relay** based on a simulated 24-hour day/night cycle - **no external timer or RTC required**.
 
-## Day & Night Irrigation Cycles
+Day & Night Irrigation Cycles
 
 - **Daytime (7 AM - 7 PM)**:
   - Pump ON: 2 minutes
