@@ -1,6 +1,6 @@
-# Auto Irrigation for hydroponics (Arduino)
+# Auto Irrigation for Hydroponics (Arduino)
 
-This Arduino project controls a **water pump** using a **relay** based on simulated 24-hour day/night cycles — **no external timer or RTC** required.
+This Arduino project controls a **water pump** using a **relay** based on a simulated 24-hour day/night cycle — **no external timer or RTC required**.
 
 ## Day & Night Irrigation Cycles
 
@@ -12,35 +12,44 @@ This Arduino project controls a **water pump** using a **relay** based on simula
   - Pump ON: 2 hours
   - Pump OFF: 1 minute
 
-The project uses `millis()` to track time internally and switches cycles based on elapsed time from power-up. A manual offset simulates starting at **7:00 AM**, even if powered on at a different time.
+The project uses `millis()` to track time internally and automatically switches cycles based on elapsed time from startup. **Just power the Arduino at exactly 7:00 AM**, and the logic will take care of the rest.
 
 ## Hardware Used
+
 - Arduino Uno
-- 1-channel Relay module
-- Water pump (any low-voltage submersible pump)
+- 1-channel Relay Module
+- Submersible water pump (low-voltage)
 - Jumper wires
-- External power supply (for the pump and arduino when it is not connected to the computer)
+- External power supply (for Arduino and pump)
 
 ## Key Features
-- Fully **automatic timing control** without delay()
-- Day/night cycle detection using internal time tracking
-- Safe relay control (NO wiring: LOW = OFF, HIGH = ON)
-- Serial monitoring output for debugging
 
-## What I Learned
-- How to simulate real-world time with `millis()`
-- Relay control logic and safety considerations
-- Implementing automated irrigation using code only
+- Fully **automatic irrigation control**
+- No use of `delay()` — non-blocking logic with `millis()`
+- **Day/night cycle simulation** without RTC or external timer
+- Safe relay control (Normally Open wiring: LOW = OFF, HIGH = ON)
+- Serial output for real-time monitoring
 
 ## How to Use
-1. Connect the relay to pin 7
-2. Wire the relay to your pump using the **Normally Open (NO)** configuration
-3. Upload the code to the Arduino
-4. Power it on at **7:18 PM** (or adjust the offset in `systemStartMillis`)
-5. Monitor the Serial Monitor (optional) to see the ON/OFF cycle in real time
+
+1. Connect the relay to pin **7**
+2. Wire the relay to the pump using the **Normally Open (NO)** configuration
+3. Upload the code to your Arduino
+4. Power on the Arduino at **exactly 7:00 AM**
+5. Monitor the Serial Monitor (optional) for ON/OFF logs
 
 ## Files Included
+
 - `auto_irrigation_hydroponics.ino`: Main Arduino sketch
 
+## What I Learned
+
+- Simulating time-based logic using `millis()`
+- Safe relay control principles
+- Creating an automated irrigation system without delays or RTCs
+
 ## Future Improvements
-- Add RTC module (e.g., DS3231) for accurate real-time switching
+
+- Add an **RTC module** for more robust real-time tracking
+- Add soil moisture or temperature sensors for smart irrigation
+- Create a web dashboard or SMS alert system
