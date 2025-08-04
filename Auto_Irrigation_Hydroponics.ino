@@ -1,11 +1,11 @@
 #define relayPin 7
 
 // Timing in milliseconds
-const unsigned long dayOnTime = 20UL * 60UL * 1000UL;      // 2 min ON
-const unsigned long dayOffTime = 1UL * 60UL * 1000UL;    // 20 min OFF
+const unsigned long dayOnTime = 2UL * 60UL * 1000UL;      // 2 minutes ON
+const unsigned long dayOffTime = 1UL * 60UL * 1000UL;     // 1 minute OFF
 
-const unsigned long nightOnTime = 2UL * 60UL * 60UL * 1000UL;        // 2 min ON
-const unsigned long nightOffTime = 1UL * 60UL * 1000UL; // 2 hr OFF
+const unsigned long nightOnTime = 2UL * 60UL * 60UL * 1000UL;  // 2 hours ON
+const unsigned long nightOffTime = 1UL * 60UL * 1000UL;        // 1 minute OFF
 
 unsigned long systemStartMillis = 0;
 unsigned long previousMillis = 0;
@@ -13,20 +13,20 @@ bool pumpState = false;
 
 void setup() {
   pinMode(relayPin, OUTPUT);
-  digitalWrite(relayPin, LOW); // Ensure pump OFF initially
+  digitalWrite(relayPin, LOW); // Ensure pump is OFF initially
   Serial.begin(9600);
-  
-  // Manual offset to align 7:00 AM reference while powering ON at 7:18 PM
-  systemStartMillis = millis() - 44280000UL; // 12 hr 18 min offset
+
+  // No offset — Arduino powered on exactly at 7:00 AM
+  systemStartMillis = millis();
 }
 
 void loop() {
   unsigned long currentMillis = millis();
   unsigned long elapsedTime = currentMillis - systemStartMillis;
 
-  // Day = 12 hr (7 AM - 7 PM), Night = 12 hr (7 PM - 7 AM)
-  unsigned long cycle24hr = 24UL * 60UL * 60UL * 1000UL; // 24 hr in ms
-  unsigned long dayDuration = 12UL * 60UL * 60UL * 1000UL; // 12 hr in ms
+  // Define 24hr cycle: Day = 7 AM to 7 PM, Night = 7 PM to 7 AM
+  unsigned long cycle24hr = 24UL * 60UL * 60UL * 1000UL; // 24 hours in ms
+  unsigned long dayDuration = 12UL * 60UL * 60UL * 1000UL; // 12 hours in ms
 
   bool isDay = (elapsedTime % cycle24hr) < dayDuration;
 
@@ -36,16 +36,16 @@ void loop() {
   if (!pumpState) { // Pump is OFF
     if (currentMillis - previousMillis >= offTime) {
       pumpState = true;
-      digitalWrite(relayPin, HIGH); // HIGH = ON for NO relay wiring
+      digitalWrite(relayPin, HIGH); // Turn pump ON
       previousMillis = currentMillis;
-      Serial.println(isDay ? "DAY: Pump ON 2 min" : "NIGHT: Pump ON 2 min");
+      Serial.println(isDay ? "DAY: Pump ON (2 min)" : "NIGHT: Pump ON (2 hrs)");
     }
   } else { // Pump is ON
     if (currentMillis - previousMillis >= onTime) {
       pumpState = false;
-      digitalWrite(relayPin, LOW); // LOW = OFF for NO relay wiring
+      digitalWrite(relayPin, LOW); // Turn pump OFF
       previousMillis = currentMillis;
-      Serial.println(isDay ? "DAY: Pump OFF 20 min" : "NIGHT: Pump OFF 2 hr");
+      Serial.println(isDay ? "DAY: Pump OFF (1 min)" : "NIGHT: Pump OFF (1 min)");
     }
   }
 }
