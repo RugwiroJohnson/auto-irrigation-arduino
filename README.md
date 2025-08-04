@@ -1,6 +1,6 @@
 # Auto Irrigation for Hydroponics (Arduino)
 
-This Arduino project controls a **water pump** using a **relay** based on a simulated 24-hour day/night cycle — **no external timer or RTC required**.
+This Arduino project controls a **water pump** using a **relay** based on a simulated 24-hour day/night cycle - **no external timer or RTC required**.
 
 ## Day & Night Irrigation Cycles
 
