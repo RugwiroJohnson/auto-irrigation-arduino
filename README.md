@@ -38,18 +38,8 @@ The project uses `millis()` to track time internally and automatically switches 
 4. Power on the Arduino at **exactly 7:00 AM**
 5. Monitor the Serial Monitor (optional) for ON/OFF logs
 
-## Files Included
-
-- `auto_irrigation_hydroponics.ino`: Main Arduino sketch
-
 ## What I Learned
 
 - Simulating time-based logic using `millis()`
 - Safe relay control principles
 - Creating an automated irrigation system without delays or RTCs
-
-## Future Improvements
-
-- Add an **RTC module** for more robust real-time tracking
-- Add soil moisture or temperature sensors for smart irrigation
-- Create a web dashboard or SMS alert system
