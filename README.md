@@ -44,5 +44,5 @@ The project uses `millis()` to track time internally and automatically switches 
 - Simulating time-based logic using `millis()`  
 - Non-blocking control for real-time automation  
 - Safe and simple relay control  
-- How to build an irrigation system without delays, RTCs, or complex sensors
+- How to build an irrigation system without timers, RTCs, or complex sensors
 
